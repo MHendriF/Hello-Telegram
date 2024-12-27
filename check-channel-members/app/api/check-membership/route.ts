@@ -28,7 +28,10 @@ export async function POST(request: Request) {
       formattedChatId = '@' + channelUsername;
     }
 
-    const url = `https://api.telegram.org/bot${botToken}/getChatMember?chat_id=@${channelUsername}&user_id=${telegramId}`;
+    const url = `https://api.telegram.org/bot${botToken}/getChatMember?chat_id=${encodeURIComponent(
+      formattedChatId
+    )}&user_id=${telegramId}`;
+
     const response = await fetch(url);
 
     if (!response.ok) {
